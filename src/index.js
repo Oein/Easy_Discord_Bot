@@ -39,6 +39,43 @@ client.once('ready', (info) => {
         module.name = module.name.toLowerCase();
         module_.setName(module.name);
         module_.setDescription(module.description);
+        module.options.forEach(ot => {
+            let opts_g  = ["User" , "Boolean" , "Integer" , "Float" , "String" , "Channel" , "Role" , "Mentionable"];
+            let retFunc = (optx) => {
+                optx.setName(ot.name);
+                optx.setDescription(ot.description);
+                optx.setRequired(ot.required);
+                return optx;
+            }
+            
+            if(opts_g[0] == ot.type){
+                module_.addUserOption(retFunc);
+            }
+            else if(opts_g[1] == ot.type){
+                module_.addBooleanOption(retFunc);
+            }
+            else if(opts_g[2] == ot.type){
+                module_.addIntegerOption(retFunc);
+            }
+            else if(opts_g[3] == ot.type){
+                module_.addFloatOption(retFunc);
+            }
+            else if(opts_g[4] == ot.type){
+                module_.addStringOption(retFunc);
+            }
+            else if(opts_g[5] == ot.type){
+                module_.addChannelOption(retFunc);
+            }
+            else if(opts_g[6] == ot.type){
+                module_.addRoleOption(retFunc);
+            }
+            else if(opts_g[7] == ot.type){
+                module_.addMentionableOption(retFunc);
+            }
+            else{
+                throw new Error("Invalid option type " + ot.type);
+            }
+        });
         temp_.push(module_);
         commandJson[module.name.toLocaleLowerCase()] = module;
     });
