@@ -22,14 +22,12 @@ else{
 let client = new Client({ intents: [Intents.FLAGS.GUILDS , Intents.FLAGS.GUILD_MESSAGES , Intents.FLAGS.DIRECT_MESSAGES] });
 
 client.once('ready', (info) => {
-    info.user.setActivity("Doing something that I can do");
     console.log("---------- Bot Info ----------");
 	console.log("Bot Name \t: " , info.user.username);
     console.log("Bot ID \t\t: " , info.user.id);
     console.log("Bot Tag \t: " , info.user.tag);
     console.log("Bot Avatar \t: " , info.user.avatar);
     console.log("Bot Status \t: " , info.user.presence.status);
-    console.log("Bot Game \t: " , info.user.presence.activities[0].name);
     console.log("------------------------------");
 
     let temp_ = [];
