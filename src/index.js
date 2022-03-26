@@ -61,8 +61,6 @@ client.once('ready', (info) => {
 
 client.on("messageCreate", (message) => {
     if (message.author.bot) return false; 
-    
-    console.log(`Message from ${message.author.username}: ${message.content}`);
     if(PinRep[message.content] != undefined){
         message.reply(PinRep[message.content]);
     }
