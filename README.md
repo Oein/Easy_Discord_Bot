@@ -56,6 +56,7 @@ let MyModules = [
 
 # Adding Pinned Replys
 Note! : `This Pinned Replys don't have slash(/) in front of the message`
+
 Goto modules/pinned_replys.json
 And add your Pinned Coomand and Pinned Reply
 ex :
