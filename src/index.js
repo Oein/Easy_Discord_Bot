@@ -38,36 +38,38 @@ client.once('ready', (info) => {
         module_.setName(module.name);
         module_.setDescription(module.description);
         module.options.forEach(ot => {
-            let opts_g  = ["User" , "Boolean" , "Integer" , "Float" , "String" , "Channel" , "Role" , "Mentionable"];
+            let opts_g  = ["user" , "boolean" , "integer" , "float" , "string" , "channel" , "role" , "mentionable"];
             let retFunc = (optx) => {
                 optx.setName(ot.name);
                 optx.setDescription(ot.description);
                 optx.setRequired(ot.required);
                 return optx;
             }
+
+	    let ott = ot.type.toLocaleLowerCase();
             
-            if(opts_g[0] == ot.type){
+            if(opts_g[0] == ott){
                 module_.addUserOption(retFunc);
             }
-            else if(opts_g[1] == ot.type){
+            else if(opts_g[1] == ott){
                 module_.addBooleanOption(retFunc);
             }
-            else if(opts_g[2] == ot.type){
+            else if(opts_g[2] == ott){
                 module_.addIntegerOption(retFunc);
             }
-            else if(opts_g[3] == ot.type){
+            else if(opts_g[3] == ott){
                 module_.addFloatOption(retFunc);
             }
-            else if(opts_g[4] == ot.type){
+            else if(opts_g[4] == ott){
                 module_.addStringOption(retFunc);
             }
-            else if(opts_g[5] == ot.type){
+            else if(opts_g[5] == ott){
                 module_.addChannelOption(retFunc);
             }
-            else if(opts_g[6] == ot.type){
+            else if(opts_g[6] == ott){
                 module_.addRoleOption(retFunc);
             }
-            else if(opts_g[7] == ot.type){
+            else if(opts_g[7] == ott){
                 module_.addMentionableOption(retFunc);
             }
             else{
