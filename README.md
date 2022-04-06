@@ -23,6 +23,16 @@ export default class [Your Command Name] {
         this.name = '[Your Command Name]'; // Name only supports lowercase
                                            // this name will be /[Your Command Name]
         this.description = '[Your Command Description]';
+        
+        // Your command argvs
+        this.options = [
+            {
+                name: '[Option Name]',
+                description: '[Option Description]',
+                required: true, // true || false
+                type: '[Option Type]'
+            }
+        ];
     }
 
     async execute(interaction) {
@@ -37,6 +47,13 @@ ex: `ping`
 
 Change [Your Command Description] to your command's description
 ex: `A simple command`
+
+Array `options` can be empty, but cannot be undefined. 
+Option's types are 
+
+`User` , `Boolean` , `Integer` , `Float` , `String` , `Channel` , `Role` , `Mentionable`
+
+---
 
 In execute function
 You process things with interaction
