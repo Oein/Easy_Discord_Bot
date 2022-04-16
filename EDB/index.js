@@ -32,6 +32,10 @@ let commandFiles = readdirSync(CommandsFolderPath).filter(file => file.endsWith(
 let NI = [];
 let commandJson = {};
 
+let bot_id = "";
+let slashCommands;
+let rest;
+
 for(let commandFile of commandFiles){
     if(commandFile == sampleCommandFileName) continue;
     let commandModulePath = "./../EDB_Commands/" + basename(commandFile).replace(".js", "");
@@ -113,8 +117,10 @@ client.on("ready" , (info) => {
         slBuilders.push(slBuilder);
     }
 
-    let slashCommands = slBuilders.map(command => command.toJSON());
-    let rest = new REST({ version: '10' }).setToken(configFile.Token);
+    slashCommands = slBuilders.map(command => command.toJSON());
+    rest = new REST({ version: '10' }).setToken(configFile.Token);
+
+    bot_id = info.user.id;
 
     if(info.guilds != undefined){
         info.guilds.cache.map(guild => {
@@ -142,6 +148,12 @@ client.on('interactionCreate', interaction => {
         let module = commandJson[command.toLocaleLowerCase()];
         module.run(client , interaction);
     }
+});
+
+client.on("guildCreate" , guild => {
+    rest.put(Routes.applicationGuildCommands(bot_id , guild.id), { body: slashCommands })
+        .then(() => {})
+        .catch(console.error);
 });
 
 if(configFile.Token == undefined || configFile.Token == null){
