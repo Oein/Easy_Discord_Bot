@@ -1,0 +1,18 @@
+{
+    "SettingsFileGuid": {
+        "ei" : "Settings file not found.",
+        "sol" : ""
+    },
+    "CommandsFolderGuid":{
+        "ei" : "Commands folder not found.",
+        "sol" : ""
+    },
+    "SettingsFolderPathGuid":{
+        "ei" : "Settings folder path not found.",
+        "sol" : ""
+    },
+    "TokenNotFound":{
+        "ei" : "Token is not found in EDB_Settings/settings.json",
+        "sol" : ""
+    }
+}
