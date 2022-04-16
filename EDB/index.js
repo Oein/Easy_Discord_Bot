@@ -127,7 +127,9 @@ client.on("ready" , (info) => {
             console.log("[Slash Adder] Adding commands to guild " + guild.id);
             rest.put(Routes.applicationGuildCommands(info.user.id , guild.id), { body: slashCommands })
                 .then(() => {})
-                .catch(console.error);
+                .catch((err) => {
+                    console.warn("Error while adding commands to guild " + guild.id);
+                });
         });
         console.log('[Slash Adder] Successfully registered application ' + (findedCommand - failedCommand).toString() + "/" + findedCommand.toString() + ' commands to ' + info.guilds.cache.size + ' guilds.');
     }
