@@ -1,0 +1,22 @@
+{
+  "name": "edbv2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "EDB/index.js",
+  "scripts": {
+    "start": "npx nodemon --exec babel-node EDB/index.js",
+    "startOnce": "npx babel-node EDB/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.31.1",
+    "discord.js": "^13.6.0",
+    "nodemon": "^2.0.15"
+  }
+}
