@@ -1,18 +1,18 @@
 {
     "SettingsFileGuid": {
         "ei" : "Settings file not found.",
-        "sol" : ""
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/SettingsFileGuid.md"
     },
     "CommandsFolderGuid":{
         "ei" : "Commands folder not found.",
-        "sol" : ""
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/CommandsFolderGuid.md"
     },
     "SettingsFolderPathGuid":{
         "ei" : "Settings folder path not found.",
-        "sol" : ""
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/SettingsFolderPathGuid.md"
     },
     "TokenNotFound":{
         "ei" : "Token is not found in EDB_Settings/settings.json",
-        "sol" : ""
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/TokenNotFound.md"
     }
 }
