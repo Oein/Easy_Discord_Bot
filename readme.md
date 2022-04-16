@@ -1,4 +1,4 @@
-# Easy Discord Bot
+# Easy Discord Bot (Beta v2.0.0)
 An easy way to make a discord bot with nodeJS
 
 # Install
