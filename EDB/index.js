@@ -1,9 +1,9 @@
 import { existsSync , readdirSync } from "fs";
-import { Client } from "discord.js";
+import { Client , version } from "discord.js";
 import { REST } from "@discordjs/rest";
-import { Routes } from "discord-api-types/v10";
+import { Routes , GatewayVersion } from "discord-api-types/v10";
 import { basename } from "path";
-import { cnerror } from "./errorMessage";
+import { cnerror , onerror } from "./errorMessage";
 
 let rootPath = __dirname + "/../";
 let SettingsFolderPath = rootPath + "EDB_Settings/";
@@ -35,7 +35,16 @@ let commandJson = {};
 for(let commandFile of commandFiles){
     if(commandFile == sampleCommandFileName) continue;
     let commandModulePath = "./../EDB_Commands/" + basename(commandFile).replace(".js", "");
-    let commandModule = require(commandModulePath).default;
+    let commandModuleFull = require(commandModulePath);
+    if(commandModuleFull.default == undefined || commandModuleFull.default == null){
+        continue;
+    }
+    let commandModule = commandModuleFull.default;
+
+    if(commandModule.needIntents == undefined || commandModule.needIntents == null){
+        continue;
+    }
+
     let intents = commandModule.needIntents;
     for(let intent of intents){
         if(!NI.includes(intent)) NI.push(intent);
@@ -49,6 +58,12 @@ let client = new Client({
 
 // event handlers
 client.on("ready" , (info) => {
+    console.log("---------- EDB Info ----------");
+    console.log("Author \t\t: Oein");
+    console.log("Version \t: 2.0.0B");
+    console.log("Github \t\t: https://github.com/Oein/Easy_Discord_Bot");
+    console.log("Discord.js \t: " + version);
+    console.log("Discord Api\t: " + GatewayVersion);
     console.log("---------- Bot Info ----------");
 	console.log("Bot Name \t: " , info.user.username);
     console.log("Bot ID \t\t: " , info.user.id);
@@ -60,9 +75,38 @@ client.on("ready" , (info) => {
 
     let slBuilders = [];
 
+    let failedCommand = 0;
+    let findedCommand = 0;
+
     for(let commandFile of commandFiles){
         if(commandFile == sampleCommandFileName) continue;
-        let commandModule = require(CommandsFolderPath + commandFile).default;
+        findedCommand++;
+        let commandModulePath = "./../EDB_Commands/" + basename(commandFile).replace(".js", "");
+        let commandModuleFull = require(commandModulePath);
+        if(commandModuleFull.default == undefined || commandModuleFull.default == null){
+            onerror("CommandDefaultGuid" , "EDB_Commands/" + commandFile);
+            failedCommand++;
+            continue;
+        }
+        let commandModule = commandModuleFull.default;
+
+        if(commandModule.needIntents == undefined || commandModule.needIntents == null){
+            onerror("CommandIntentsGuid" , "EDB_Commands/" + commandFile);
+            failedCommand++;
+            continue;
+        }
+
+        if(commandModule.slashBuilder == undefined || commandModule.slashBuilder == null){
+            onerror("CommandSlashBuilderGuid" , "EDB_Commands/" + commandFile);
+            failedCommand++;
+            continue;
+        }
+
+        if(commandModule.run == undefined || commandModule.run == null){
+            onerror("CommandRunGuid" , "EDB_Commands/" + commandFile);
+            failedCommand++;
+            continue;
+        }
         
         let slBuilder = commandModule.slashBuilder;
         commandJson[slBuilder.name] = commandModule;
@@ -79,7 +123,7 @@ client.on("ready" , (info) => {
                 .then(() => {})
                 .catch(console.error);
         });
-        console.log('[Slash Adder] Successfully registered application ' + slashCommands.length + ' commands to ' + info.guilds.cache.size + ' guilds.');
+        console.log('[Slash Adder] Successfully registered application ' + (findedCommand - failedCommand).toString() + "/" + findedCommand.toString() + ' commands to ' + info.guilds.cache.size + ' guilds.');
     }
 });
 

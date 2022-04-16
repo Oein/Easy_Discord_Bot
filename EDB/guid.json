@@ -14,5 +14,21 @@
     "TokenNotFound":{
         "ei" : "Token is not found in EDB_Settings/settings.json",
         "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/TokenNotFound.md"
+    },
+    "CommandDefaultGuid":{
+        "ei" : "Command module must have default export , but it doesn't.",
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/AddCommandGuid.md"
+    },
+    "CommandIntentsGuid":{
+        "ei" : "Command module must have intents in default export, but it doesn't.",
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/AddCommandGuid.md"
+    },
+    "CommandSlashBuilderGuid":{
+        "ei" : "Command module must have slashBuilder in default export, but it doesn't.",
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/AddCommandGuid.md"
+    },
+    "CommandRunGuid":{
+        "ei" : "Command module must have run in default export, but it doesn't.",
+        "sol" : "https://github.com/Oein/Easy_Discord_Bot/blob/main/Guids/AddCommandGuid.md"
     }
 }
